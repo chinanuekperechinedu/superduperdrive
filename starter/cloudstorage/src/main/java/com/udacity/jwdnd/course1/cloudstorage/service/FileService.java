@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.awt.*;
 import java.io.IOException;
 
 import java.nio.file.Path;
@@ -41,12 +42,13 @@ public class FileService {
 
     public String getErrorMessage(MultipartFile file){
         String errorMessage = null;
+
         if(file.isEmpty()) {
-            errorMessage = "No file was selected. Kindly select a file.";
+            errorMessage = "No file was selected. Kindly choose a file.";
         } else if (file.getSize() > 2048 * 1000) {
-            errorMessage = "File is more than 2MB. ";
+            errorMessage = "Unable to upload " + file.getOriginalFilename() + " because it exceeds 2MB. ";
         } else if (exists(file)) {
-            errorMessage = "Unable to upload, " + file.getOriginalFilename() + " already exists. ";
+            errorMessage = "Unable to upload " + file.getOriginalFilename() + ", because it exists. ";
         }
         return errorMessage;
     }
@@ -75,4 +77,5 @@ public class FileService {
             throw new FileNotFoundException("Could not read file.");
         }
     }
+
 }

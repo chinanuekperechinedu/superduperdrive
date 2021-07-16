@@ -61,7 +61,7 @@ class CloudStorageTest1 {
 	@Test
 	@Order(2)
 	@DisplayName("New user signs in, logs in, accesses home page, logs out and unable to access home page")
-	public void testAuthorization(){
+	public void testAuthorization() throws InterruptedException {
 		pageLoad("signup");
 		SignupPage signupPage = new SignupPage(driver);
 		signupPage.signupSubmission("nanu", "nedu", "nanunedu", "password");
@@ -71,9 +71,11 @@ class CloudStorageTest1 {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.loginSubmission("nanunedu", "password");
 		Assertions.assertEquals("Home", driver.getTitle());
+		Thread.sleep(2000);
 
 		HomePage homePage = new HomePage(driver);
 		homePage.logout();
+		Thread.sleep(2000);
 		Assertions.assertNotEquals("Home", driver.getTitle());
 	}
 

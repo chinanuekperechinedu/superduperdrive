@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
 
     <title>Home</title>
+    <style>
+        i{
+            color: red;
+        }
+    </style>
 </head>
 <body class="p-3 mb-2 bg-light text-black">
 
@@ -24,7 +29,7 @@
         <span id="errorMsg" th:text="${errorMsg}">Example Error Message</span>
     </div>
     <div id="logoutDiv">
-        <form action="#" method="POST" th:action="@{/logout}">
+        <form action="#" method="POST" th:action="@{/login}">
             <button id="logoutBtn" type="submit" class="btn btn-secondary float-right">Logout</button>
         </form>
     </div>
@@ -46,6 +51,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <input type="file" class="form-control-file" id="fileUpload" name="fileUpload">
+                                <p><small><i>You cannot upload a file that is larger than 2MB</i></small></p>
                             </div>
                             <div class="col-sm-4">
                                 <button type="submit" class="btn btn-dark">Upload</button>

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
@@ -42,6 +43,12 @@ public class HomeController {
         model.addAttribute("credentials", new CredentialForm());
         model.addAttribute("files", this.fileMapper.getFilesByUserId(user.getUserid()));
         return "home";
+    }
+
+    @PostMapping("/logout")
+    public String logoutPage(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("logout", "You have been logged out.");
+        return "redirect:/login";
     }
 
 

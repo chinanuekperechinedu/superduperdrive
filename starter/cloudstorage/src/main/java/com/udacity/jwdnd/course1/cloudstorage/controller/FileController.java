@@ -13,12 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@ControllerAdvice
 public class FileController {
 
     private AuthenticationService authenticationService;
@@ -47,7 +49,6 @@ public class FileController {
         } else{
             redirectAttributes.addFlashAttribute("errorMsg", errorMessage);
         }
-
         return "redirect:/home";
     }
 
@@ -76,6 +77,13 @@ public class FileController {
         } else {
             redirectAttributes.addFlashAttribute("errorMsg", "You were unable to delete " + fileName + "! file.");
         }
+        return "redirect:/home";
+    }
+
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public String handleUploadError(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("errorMsg", "Unable to upload file because it exceeds 2MB");
         return "redirect:/home";
     }
 }
