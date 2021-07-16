@@ -17,6 +17,9 @@ public class LoginPage {
     @FindBy(id = "loginBtn")
     private WebElement loginBtn;
 
+    @FindBy(id = "logout-msg")
+    private WebElement logoutMsg;
+
     public LoginPage(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
@@ -35,5 +38,8 @@ public class LoginPage {
         this.loginBtn.click();
     }
 
+    public boolean isLogout(){
+        return this.logoutMsg != null;
+    }
 
 }

@@ -98,7 +98,7 @@ public class CloudStorageTest3 {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     @DisplayName("File upload test")
     public void testFileUpload() throws InterruptedException {
         getAuthenticated(driver);

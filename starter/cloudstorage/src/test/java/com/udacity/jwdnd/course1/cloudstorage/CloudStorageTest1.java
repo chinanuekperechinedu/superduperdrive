@@ -17,6 +17,8 @@ class CloudStorageTest1 {
 	@LocalServerPort
 	private int port;
 
+	private String baseUrl;
+
 	private WebDriver driver;
 
 	@BeforeAll
@@ -37,7 +39,8 @@ class CloudStorageTest1 {
 	}
 
 	public void pageLoad(String page){
-		driver.get("http://localhost:" + this.port + "/" + page);
+		this.baseUrl = "http://localhost:" + this.port;
+		driver.get(this.baseUrl + "/" + page);
 	}
 
 	@Test
@@ -75,8 +78,10 @@ class CloudStorageTest1 {
 
 		HomePage homePage = new HomePage(driver);
 		homePage.logout();
+		Assertions.assertTrue(loginPage.isLogout());
 		Thread.sleep(2000);
-		Assertions.assertNotEquals("Home", driver.getTitle());
+		driver.get(baseUrl + "/home");
+		Assertions.assertNotEquals(baseUrl + "/home", driver.getCurrentUrl());
 	}
 
 

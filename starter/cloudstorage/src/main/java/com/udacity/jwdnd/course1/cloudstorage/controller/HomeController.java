@@ -44,12 +44,4 @@ public class HomeController {
         model.addAttribute("files", this.fileMapper.getFilesByUserId(user.getUserid()));
         return "home";
     }
-
-    @PostMapping("/logout")
-    public String logoutPage(RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("logout", "You have been logged out.");
-        return "redirect:/login";
-    }
-
-
 }
